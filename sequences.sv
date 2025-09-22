@@ -5,7 +5,7 @@ class sequences extends uvm_sequence#(base_seq);
         super.new(name);
     endfunction
 
-    transaction tr;
+    base_seq tr;
 
     virtual task body();
         repeat(15)
@@ -26,7 +26,7 @@ function new(input string name = "rst_on");
     super.new(name);
 endfunction
 
-transaction tr;
+base_seq tr;
 
     virtual task body();
         repeat(15)
@@ -46,7 +46,7 @@ function new(input string namer ="normal_seq");
 super.new(name);
 endfunction
 
-transaction tr;
+base_seq tr;
 
 virtual task body();
     repeat(15)
