@@ -9,7 +9,7 @@ class sequences extends uvm_sequence#(base_seq);
 
     virtual task body();
         repeat(15)
-            tr = transaction::type_id::create("tr");
+            tr = base_seq::type_id::create("tr");
             start_item(tr);
             assert (tr.randomize());
             tr.rst = 1'b0;
@@ -30,7 +30,7 @@ base_seq tr;
 
     virtual task body();
         repeat(15)
-        tr = transaction::type_id::create("tr");
+        tr = base_seq::type_id::create("tr");
         start_item(tr);
         assert(tr.randomize());
         tr.rst = 1'b1;
@@ -50,7 +50,7 @@ base_seq tr;
 
 virtual task body();
     repeat(15)
-    tr = transaction::type_id::create("tr");
+    tr = base_seq::type_id::create("tr");
     start_item(tr);
     assert (tr.randomize()); 
     `uvm_info("sequences", %sformatf("rst = %0b | din = %0b | dout = %0b",tr.rst, tr.din, tr.dout), UVM_NONE)
