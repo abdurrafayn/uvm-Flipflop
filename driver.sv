@@ -1,5 +1,6 @@
 class driver extends uvm_driver#(base_seq);
 virtual add_if intf;
+base_seq tr;
 
 `uvm_object_utils(driver)
 
@@ -20,10 +21,14 @@ virtual add_if intf;
       super.run_phase (phase);
 
       forever begin
+
          `uvm_info (get_type_name (), $sformatf ("Waiting for data from sequencer"), UVM_LOW)
-         seq_item_port.get_next_item (tr);
-         drive_item (tr);
+         seq_item_port.get_next_item(tr);
+         intf.rst <= tr.rst;
+         intf.din <= tr.din;
+         `uvm_info("DRV", $sformatf("rst : %0b  din : %0b  dout : %0b", tr.rst, tr.din, tr.dout), UVM_NONE);
          seq_item_port.item_done();
+         repeat(2) @(posedge intf.clk);
       end
    endtask
 endclass
